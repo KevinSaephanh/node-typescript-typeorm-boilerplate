@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  node-app:
+    command: /bin/sh -c "echo 'Running on prod!' && npm run build && npm start"
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+
+    postgres:
+      container_name: "prod_db"
+      image: "postgres:12.6-alpine"
+      env_file:
+        - ./.prod.env
+      ports:
+        - "4000:4000"
